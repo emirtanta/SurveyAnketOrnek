@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Anket";
+}
+
+
+
+@section Css {
+    <!-- SurveyJS CSS Dosyasını doğru yükleyin -->
+    <link href="https://unpkg.com/survey-core@1.9.127/defaultV2.min.css" rel="stylesheet" />
+}
+
+<div id="surveyContainer"></div>
+
+@section Scripts {
+    <!-- jQuery ve SurveyJS'nin doğru sürümlerini ekleyin -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @* <script src="https://unpkg.com/survey-jquery@1.9.127/survey.jquery.min.js"></script>*@
+    <script src="~/js/survey.jquery.min.js"></script>
+
+     <script>
+        $(document).ready(function () {
+            $.get("/Home/GetSurveyQuestions", function (surveyJson) {
+                const survey = new Survey.Model(surveyJson);
+
+                survey.onComplete.add(function (sender) {
+                    const surveyData = sender.data;
+
+                    $.ajax({
+                        url: '/Home/SubmitSurvey',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(surveyData),
+                        success: function () {
+                            alert("Anket başarıyla gönderildi!");
+                        },
+                        error: function () {
+                            alert("Bir hata oluştu.");
+                        }
+                    });
+                });
+
+                $("#surveyContainer").Survey({ model: survey });
+            });
+        });
+
+
+        
+
+
+    </script>  
+
+    @* <script>
+        $(document).ready(function () {
+            const surveyJson = {
+                title: "Geri Bildirim Anketi",
+                pages: [
+                    {
+                        elements: [
+                            {
+                                type: "text",
+                                name: "isim",
+                                title: "Adınız nedir?"
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "memnuniyet",
+                                title: "Hizmetimizden memnun kaldınız mı?",
+                                choices: ["Evet", "Hayır"]
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            // Survey modelini oluştur
+            const survey = new Survey.Model(surveyJson);
+
+            // Anket tamamlandığında yapılacak işlemi AJAX ile veritabanına gönder
+            survey.onComplete.add(function (sender) {
+                const surveyData = sender.data;
+
+                $.ajax({
+                    url: '/Home/SubmitSurvey',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(surveyData),
+                    success: function (response) {
+                        alert("Anket başarıyla gönderildi!");
+                        // window.location.href = "/Home/ThankYou"; // isteğe bağlı yönlendirme
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Bir hata oluştu: " + error);
+                    }
+                });
+            });
+
+            // SurveyJS anketini render et
+            $("#surveyContainer").Survey({ model: survey });
+        });
+
+
+
+
+
+    </script> *@
+
+
+}
