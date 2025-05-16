@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SurveyQuestion>
+﻿@using SurveyAnketOrnek.Helper
+@model IEnumerable<SurveyQuestion>
 @{
     ViewData["Title"] = "Soru Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,9 +14,10 @@
 <table class="table table-hover table-responsive mt-3">
     <thead>
         <tr>
-            <th>Soru Konusu</th>
+            <th>Anket Adı</th>
             <th>Soru</th>
             <th>Tip</th>
+            
             <th>Seçenekler</th>
             <th></th>
         </tr>
@@ -24,7 +26,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Name</td>
+                <td>
+                    @* @GetEnumDisplayName(item.SurveyType) *@
+                    @item.SurveyType.GetDisplayName()
+                </td>
                 <td>@item.Title</td>
                 <td>@item.Type</td>
                 <td>@item.ChoicesJson</td>

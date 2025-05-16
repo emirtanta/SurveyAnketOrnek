@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SurveyAnketOrnek.Data;
+using SurveyAnketOrnek.Helper;
 using SurveyAnketOrnek.Models;
+using SurveyAnketOrnek.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace SurveyAnketOrnek.Areas.Admin.Controllers
 {
@@ -26,6 +30,10 @@ namespace SurveyAnketOrnek.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult QuestionCreate()
         {
+
+
+            ViewBag.SurveyTypeList = EnumHelper.GetSelectList<SurveyType>();
+
             return View();
         }
 
@@ -40,6 +48,9 @@ namespace SurveyAnketOrnek.Areas.Admin.Controllers
 
                 return RedirectToAction(nameof(QuestionList));
             }
+
+
+            ViewBag.SurveyTypeList = EnumHelper.GetSelectList<SurveyType>();
 
             return View(question);
         }
@@ -58,6 +69,10 @@ namespace SurveyAnketOrnek.Areas.Admin.Controllers
             {
                 return NotFound("Soru bulunamadı!");
             }
+
+            //ViewBag.PersonType = new SelectList(Enum.GetValues<SurveyType>());
+
+            ViewBag.SurveyTypeList = EnumHelper.GetSelectList<SurveyType>();
 
             return View(question);
         }
@@ -96,6 +111,10 @@ namespace SurveyAnketOrnek.Areas.Admin.Controllers
                 return RedirectToAction(nameof(QuestionList));
             }
 
+            //ViewBag.PersonType = new SelectList(Enum.GetValues<SurveyType>());
+
+            ViewBag.SurveyTypeList = EnumHelper.GetSelectList<SurveyType>();
+
             return View(question);
         }
 
@@ -131,5 +150,7 @@ namespace SurveyAnketOrnek.Areas.Admin.Controllers
         {
             return _context.SurveyQuestions.Any(e => e.Id == id);
         }
+
+        
     }
 }

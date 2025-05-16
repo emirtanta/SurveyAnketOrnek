@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SurveyAnketOrnek.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace SurveyAnketOrnek.Models
 {
@@ -7,7 +8,11 @@ namespace SurveyAnketOrnek.Models
         public int Id { get; set; }
 
         [Display(Name ="Soru Konusu")]
-        public string Name { get; set; }  // Örn: "isim"
+        public string? Name { get; set; }  // Örn: "isim" bu alan silinecek
+
+        [Required(ErrorMessage = "Anket adı girilmesi zorunludur!")]
+        [Display(Name ="Anket Adı")]
+        public SurveyType SurveyType { get; set; } 
 
         [Required(ErrorMessage ="Soru adı girilmesi zorunludur!")]
         [Display(Name ="Soru")]
