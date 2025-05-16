@@ -1,0 +1,30 @@
+﻿@model AppRole
+@{
+    ViewData["Title"] = "Rol Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="Roles" asp-action="RoleCreate">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label class="control-label">Rol Adı</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <a asp-area="Admin" asp-controller="Roles" asp-action="RoleList" class="btn btn-outline-danger btn-sm">İptal</a>
+                <input type="submit" value="Kaydet" class="btn btn-outline-primary btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+

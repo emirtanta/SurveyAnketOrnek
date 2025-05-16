@@ -1,0 +1,50 @@
+﻿@model SurveyQuestion
+@{
+    ViewData["Title"] = "Soru Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-area="Admin" asp-controller="SurveyQuestions" asp-action="QuestionCreate" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger" />
+    </div>
+
+    @* type dropdown bölümü *@
+    <div class="form-group">
+        <label asp-for="Type"></label>
+        <select asp-for="Type" class="form-control">
+            <option value="text">Metin (text)</option>
+            <option value="radiogroup">Seçmeli (radiogroup)</option>
+            <option value="checkbox">Çoklu Seçim (checkbox)</option>
+            <option value="comment">Çoklu satır</option>
+        </select>
+        <span asp-validation-for="Type" class="text-danger" />
+    </div>
+
+    @* seçenekler zorunlu alan değil *@
+    <div class="form-group">
+        <label asp-for="ChoicesJson">Seçenekler (JSON formatında)</label>
+        <textarea asp-for="ChoicesJson" class="form-control" placeholder='["Evet", "Hayır"]'></textarea>
+        <span asp-validation-for="ChoicesJson" class="text-danger" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a asp-action="QuestionList" class="btn btn-secondary">İptal</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,50 @@
+﻿@model UserProfilDto
+@{
+    ViewData["Title"] = "Profil Bilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h2 class="text-center">@ViewData["Title"]</h2>
+
+            <form asp-action="Profile" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Surname"></label>
+                    <input asp-for="Surname" class="form-control" readonly />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" readonly />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                </div>
+
+                <br />
+
+                <div class="form-group text-center">
+                    <a asp-area="Admin" asp-controller="Account" asp-action="UserList" class="btn btn-outline-danger btn-sm">Geri</a>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Devam Et</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

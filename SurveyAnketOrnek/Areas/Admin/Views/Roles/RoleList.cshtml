@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AppRole>
+@{
+    ViewData["Title"] = "Rol Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-area="Admin" asp-controller="Roles" asp-action="RoleCreate" class="btn btn-outline-primary">Rol Ekle</a>
+</p>
+
+<table class="table table-hover table-responsive ">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a asp-action="RoleEdit" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Düzenle</a>
+                    <a asp-action="RoleDelete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm"
+                       onclick="return confirm('Rol silinecektir. Onaylıyor musunuz?');"> Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

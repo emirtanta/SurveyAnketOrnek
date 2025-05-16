@@ -56,7 +56,7 @@ namespace SurveyAnketOrnek.Controllers
 
 
 
-        //statik surveyjs içerisindeki nesnesindeki verileri alýr ve veritabanýna kaydeder
+        //statik surveyjs içerisindeki nesnesindeki verileri alýr ve veritabanýna kaydeder. 
 
         [HttpPost]
         public async Task<IActionResult> SubmitSurvey([FromBody] Dictionary<string, string> data)
@@ -79,6 +79,25 @@ namespace SurveyAnketOrnek.Controllers
             return View();
         }
 
+
+        #region tekil kod oluþturma ve ankete sadece 1 defalýk katýlabilme durumu içindir.Ýlerde tekrardan kullanýlmak üzere youm satýrýndan açýlabilir.
         
+
+        //public IActionResult Start(string code)
+        //{
+        //    var access = _db.SurveyAccesses.FirstOrDefault(x => x.AccessCode == code);
+
+        //    if (access == null)
+        //        return NotFound("Geçersiz kod");
+
+        //    if (access.HasParticipated)
+        //        return View("AlreadySubmitted");
+
+        //    return View("Survey", access);
+        //}
+
+
+        #endregion
+
     }
 }

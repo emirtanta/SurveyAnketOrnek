@@ -1,0 +1,24 @@
+﻿@model SurveyQuestion
+@{
+    ViewData["Title"] = "Soru Sil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Soru Sil</h1>
+
+<h3>Bu soruyu silmek istediğinize emin misiniz?</h3>
+
+<dl class="row">
+    <dt class="col-sm-2">Ad</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Soru</dt>
+    <dd class="col-sm-10">@Model.Title</dd>
+</dl>
+
+<form asp-action="QuestionDelete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
+

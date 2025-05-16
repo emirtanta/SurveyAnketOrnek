@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Soru Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center"><b>@ViewData["Title"]</b></h1>
+
+<br />
+
+<a asp-action="QuestionCreate" class="btn btn-outline-primary btn-sm"> Soru Ekle</a>
+
+<table class="table table-hover table-responsive mt-3">
+    <thead>
+        <tr>
+            <th>Soru Konusu</th>
+            <th>Soru</th>
+            <th>Tip</th>
+            <th>Seçenekler</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Title</td>
+                <td>@item.Type</td>
+                <td>@item.ChoicesJson</td>
+                <td>
+                    <a asp-action="QuestionEdit" asp-route-id="@item.Id">Düzenle</a> |
+                    <a asp-action="QuestionDelete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

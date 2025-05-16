@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SurveyAnketOrnek.Data;
+using SurveyAnketOrnek.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,17 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+//IdentityRole RoleManager kullanýlmak istenmediði durumdaki tanimlamasi
+//builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+//                .AddEntityFrameworkStores<AppDbContext>()
+//                .AddDefaultTokenProviders();
+
+//IdentityRole tanimlamasi
+builder.Services.AddIdentity<AppUser, AppRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -25,6 +38,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+
+app.MapControllerRoute(
+            name: "Admin",
+            pattern: "{area:exists}/{controller=Main}/{action=Index}/{id?}"
+          );
 
 app.MapControllerRoute(
     name: "default",

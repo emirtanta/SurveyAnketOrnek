@@ -1,0 +1,38 @@
+﻿@model LoginDto
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="Account" asp-action="Login">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <a asp-area="Admin" asp-controller="Account" asp-action="UserList" class="btn btn-outline-danger btn-sm">İptal</a>
+                <input type="submit" value="Giriş Yap" class="btn btn-outline-primary btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+
